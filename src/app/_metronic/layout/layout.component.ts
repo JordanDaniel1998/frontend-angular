@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { LayoutService } from './core/layout.service';
 import { LayoutInitService } from './core/layout-init.service';
 import { ILayout, LayoutType } from './core/configs/config';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-layout',
@@ -74,7 +75,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private initService: LayoutInitService,
     private layout: LayoutService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) {
     // define layout type and load layout
     this.router.events.subscribe((event) => {
@@ -91,6 +93,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   ngOnInit() {
@@ -284,9 +287,18 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   updateFooter(config: ILayout) {
-    this.appFooterCSSClass = this.layout.getProp('app.footer.class', config) as string;
-    this.appFooterContainer = this.layout.getProp('app.footer.container', config) as string;
-    this.appFooterContainerCSSClass = this.layout.getProp('app.footer.containerClass', config) as string;
+    this.appFooterCSSClass = this.layout.getProp(
+      'app.footer.class',
+      config
+    ) as string;
+    this.appFooterContainer = this.layout.getProp(
+      'app.footer.container',
+      config
+    ) as string;
+    this.appFooterContainerCSSClass = this.layout.getProp(
+      'app.footer.containerClass',
+      config
+    ) as string;
     if (this.appFooterContainer === 'fixed') {
       this.appFooterContainerCSSClass += ' container-xxl';
     } else {
@@ -295,14 +307,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.appFooterFixedDesktop = this.layout.getProp('app.footer.fixed.desktop', config) as boolean;
+    this.appFooterFixedDesktop = this.layout.getProp(
+      'app.footer.fixed.desktop',
+      config
+    ) as boolean;
     if (this.appFooterFixedDesktop) {
-      document.body.setAttribute('data-kt-app-footer-fixed', 'true')
+      document.body.setAttribute('data-kt-app-footer-fixed', 'true');
     }
 
-    this.appFooterFixedMobile = this.layout.getProp('app.footer.fixed.mobile') as boolean;
+    this.appFooterFixedMobile = this.layout.getProp(
+      'app.footer.fixed.mobile'
+    ) as boolean;
     if (this.appFooterFixedMobile) {
-      document.body.setAttribute('data-kt-app-footer-fixed-mobile', 'true')
+      document.body.setAttribute('data-kt-app-footer-fixed-mobile', 'true');
     }
   }
 
