@@ -160,8 +160,8 @@ export const environment = {
     },
   },
   URL_BACKEND: 'http://api-domain.com/',
-  URL_SERVICIOS: 'http://api-domain.com/api',
-  URL_FRONTED: 'http://admi.domain.com',
+  URL_SERVICES: 'http://api-domain.com/api',
+  URL_FRONTEND: 'http://admi.domain.com',
 };
 
 /*
